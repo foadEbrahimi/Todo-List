@@ -12,9 +12,22 @@ body {
   background: rgb(131, 58, 180);
   background: linear-gradient(
     90deg,
-    rgba(131, 58, 180, 1) 0%,
-    rgba(69, 125, 252, 1) 100%
+    rgba(69, 125, 252, 1) 0%,
+    rgba(131, 58, 180, 1) 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+form {
+  background: #005aa7; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #005aa7,
+    #fffde4
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #005aa7 50%,
+    #fffde4
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
