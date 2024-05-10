@@ -4,7 +4,7 @@ export default function Todo() {
   return (
     <div className="flex items-center justify-between w-[21rem] p-2">
       <div>
-        <div class="flex items-center gap-x-2">
+        <div className="flex items-center gap-x-2">
           <input type="checkbox" className="radio radio-success" />
           <p className="pb-1">gym</p>
         </div>
