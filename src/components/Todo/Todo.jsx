@@ -1,19 +1,21 @@
 import React from 'react';
-export default function Todo() {
+export default function Todo({ todo, onDelete }) {
   const date = new Date();
+  const hour = date.getHours();
+  const min = date.getMinutes();
   return (
     <div className="flex items-center justify-between w-[21rem] p-2">
       <div>
         <div className="flex items-center gap-x-2">
           <input type="checkbox" className="radio radio-success" />
-          <p className="pb-1">gym</p>
+          <p className="pb-1">{todo.task}</p>
         </div>
       </div>
       <div className="flex items-center gap-x-4">
         <span className="text-[1.1rem]">
-          {date.getHours()}:{date.getMinutes()} pm
+          {hour}:{min} {hour > 12 ? 'pm' : 'am'}
         </span>
-        <span className="cursor-pointer">
+        <span className="cursor-pointer" onClick={() => onDelete(todo.id)}>
           <svg
             className="w-[15px]"
             xmlns="http://www.w3.org/2000/svg1"

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
-export default function Form() {
+export default function Form({ onAddTask }) {
   const [task, setTask] = useState('');
   const notify = () =>
-    toast('تسک شما با موفقیت ثبت شد', {
+    toast('Your task added ❤', {
       type: 'success',
-      isLoading: false,
+      className: '',
     });
   function handlerAddTask(e) {
     e.preventDefault();
@@ -16,7 +16,7 @@ export default function Form() {
 
     const id = crypto.randomUUID();
     const newTask = { task, id };
-    console.log(newTask);
+    onAddTask(newTask);
     setTask('');
     notify();
   }
