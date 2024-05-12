@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
-import { toast } from 'react-toastify';
 
-export default function Form({ onAddTask }) {
+export default function Form({ onAddTask, onNotify }) {
   const [task, setTask] = useState('');
-  const notify = () =>
-    toast('Your task added ❤', {
-      type: 'success',
-      className: '',
-    });
   function handlerAddTask(e) {
     e.preventDefault();
     // console.log('new task');
@@ -17,7 +11,7 @@ export default function Form({ onAddTask }) {
     const newTask = { task, id, complated: false };
     onAddTask(newTask);
     setTask('');
-    notify();
+    onNotify('Your task added ❤', 'success');
   }
   return (
     <form

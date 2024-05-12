@@ -3,18 +3,12 @@ import Header from './components/Header';
 import Todos from './components/Todo/Todos';
 import Form from './components/Form';
 import 'react-toastify/dist/ReactToastify.css';
-import { Zoom, ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast, Flip } from 'react-toastify';
 export default function App() {
   const [tasks, setTasks] = useState(null);
-  const notify = () =>
-    toast('Your task Deleted', {
-      type: 'error',
-      className: '',
-    });
-  const notifyComplate = message =>
+  const notify = (message, type) =>
     toast(message, {
-      type: 'info',
-      className: '',
+      type: type,
     });
   function handlerAddTask(newTask) {
     setTasks(tasks => {
@@ -26,11 +20,10 @@ export default function App() {
     });
   }
   function handlerDeleteTask(id) {
-    // console.log('delete', id);
     setTasks(tasks => {
       return tasks.filter(todo => todo.id !== id);
     });
-    notify();
+    notify('Your task Deleted', 'error');
   }
   function handlerComplateTask(id) {
     setTasks(tasks =>
@@ -38,12 +31,12 @@ export default function App() {
         task.id === id ? { ...task, complated: !task.complated } : task
       )
     );
-    notifyComplate('Your task status has changed');
+    notify('Your task status has changed', 'info');
   }
   return (
     <div className="h-screen flex flex-col items-center pt-24 gap-y-6">
       <Header />
-      <Form onAddTask={handlerAddTask} />
+      <Form onAddTask={handlerAddTask} onNotify={notify} />
       <Todos
         tasks={tasks}
         onDelete={handlerDeleteTask}
@@ -54,7 +47,7 @@ export default function App() {
         closeButton={false}
         autoClose={1500}
         hideProgressBar={false}
-        transition={Zoom}
+        transition={Flip}
         pauseOnHover={false}
       />
 
