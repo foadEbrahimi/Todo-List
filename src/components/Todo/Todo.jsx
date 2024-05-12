@@ -1,13 +1,21 @@
-import React from 'react';
-export default function Todo({ todo, onDelete }) {
+import React, { useState } from 'react';
+export default function Todo({ todo, onDelete, onComplated }) {
   const date = new Date();
   const hour = date.getHours();
   const min = date.getMinutes();
   return (
-    <div className="flex items-center justify-between w-[21rem] p-2">
+    <div
+      className={`flex items-center justify-between w-[21rem] transition-all duration-500 p-2 ${
+        todo.complated ? 'line-through opacity-50' : ''
+      }`}
+    >
       <div>
         <div className="flex items-center gap-x-2">
-          <input type="checkbox" className="radio radio-success" />
+          <input
+            type="checkbox"
+            className="radio radio-success"
+            onChange={() => onComplated(todo.id)}
+          />
           <p className="pb-1">{todo.task}</p>
         </div>
       </div>

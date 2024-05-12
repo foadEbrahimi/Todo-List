@@ -13,9 +13,8 @@ export default function Form({ onAddTask }) {
     // console.log('new task');
 
     if (!task) return;
-
     const id = crypto.randomUUID();
-    const newTask = { task, id };
+    const newTask = { task, id, complated: false };
     onAddTask(newTask);
     setTask('');
     notify();

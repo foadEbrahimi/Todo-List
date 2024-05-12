@@ -3,22 +3,17 @@ import Header from './components/Header';
 import Todos from './components/Todo/Todos';
 import Form from './components/Form';
 import 'react-toastify/dist/ReactToastify.css';
-import { Bounce, ToastContainer, toast } from 'react-toastify';
-const init = [
-  {
-    task: 'foad',
-    id: 9,
-  },
-  {
-    task: 'miad',
-    id: 10,
-  },
-];
+import { Zoom, ToastContainer, toast } from 'react-toastify';
 export default function App() {
   const [tasks, setTasks] = useState(null);
   const notify = () =>
     toast('Your task Deleted', {
       type: 'error',
+      className: '',
+    });
+  const notifyComplate = message =>
+    toast(message, {
+      type: 'info',
       className: '',
     });
   function handlerAddTask(newTask) {
@@ -37,19 +32,42 @@ export default function App() {
     });
     notify();
   }
+  function handlerComplateTask(id) {
+    setTasks(tasks =>
+      tasks.map(task =>
+        task.id === id ? { ...task, complated: !task.complated } : task
+      )
+    );
+    notifyComplate('Your task status has changed');
+  }
   return (
     <div className="h-screen flex flex-col items-center pt-24 gap-y-6">
       <Header />
       <Form onAddTask={handlerAddTask} />
-      <Todos tasks={tasks} onDelete={handlerDeleteTask} />
+      <Todos
+        tasks={tasks}
+        onDelete={handlerDeleteTask}
+        onComplated={handlerComplateTask}
+      />
       <ToastContainer
         position="top-left"
         closeButton={false}
         autoClose={1500}
         hideProgressBar={false}
-        transition={Bounce}
+        transition={Zoom}
         pauseOnHover={false}
       />
+
+      <div className="absolute bottom-5 left-5">
+        <a
+          href="https://github.com/foadEbrahimi"
+          className="text-white flex items-center"
+          target="_blank"
+        >
+          <img src="logo2.png " alt="Logo" className="w-12" />
+          Github | Foad Ebrahimi
+        </a>
+      </div>
     </div>
   );
 }
